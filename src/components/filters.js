@@ -17,6 +17,8 @@ export default class Filters extends React.Component {
     }
   }
 
+  
+
   render() {
     return (
       <nav className="navbar is-info" style={{ justifyContent: "center" }}>

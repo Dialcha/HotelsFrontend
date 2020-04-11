@@ -8,6 +8,11 @@ export default class DateFilter extends React.Component {
       date: "",
       icon: "",
     };
+    this.handleDateChange = this.handleDateChange.bind(this); //add
+  }
+
+  handleDateChange(event) {
+    this.props.onDateChange(event)
   }
 
   render() {
@@ -16,7 +21,8 @@ export default class DateFilter extends React.Component {
     return (
       <div className="field">
         <div className="control has-icons-left">
-          <input className="input" type="date" value={fecha}/>
+          <input className="input" type="date" value={fecha}
+          onChange={ this.handleDateChange } name={ this.props.name }/>
           <span className="icon is-small is-left">
             <i className={"fas" + " " + this.props.icon}></i>
           </span>
