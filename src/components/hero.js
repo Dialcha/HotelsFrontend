@@ -1,4 +1,7 @@
 import React from 'react';
+import * as moment from 'moment';
+import localization from 'moment/locale/es';
+moment.updateLocale('es', localization);
 
 export default class Hero extends React.Component {
     constructor(props) {
@@ -16,8 +19,8 @@ export default class Hero extends React.Component {
 
     render() {
         const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        let desde = this.props.filters.dateFrom.toLocaleTimeString('es-CO', options);
-        let hasta = this.props.filters.dateTo.toLocaleTimeString('es-CO', options);
+        let desde = moment(this.props.filters.dateFrom).format('dddd, LL');
+        let hasta = moment(this.props.filters.dateTo).format('dddd, LL');
 
         return(
         <section className="hero is-primary">
