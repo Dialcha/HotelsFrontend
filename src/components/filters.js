@@ -1,20 +1,19 @@
 import React from "react";
-import './App.css';
-import { today, hotelsData } from './data/data'
-import DateFilter from './components/datefilter';
-import OptionsFilter from './components/optionsfilter';
+import '../App.css';
+import DateFilter from './datefilter';
+import OptionsFilter from './optionsfilter';
 
 export default class Filters extends React.Component {
   constructor(props) {
     super(props);
     this.props = {
-        filters = {
-            dateFrom: today, // Proviene del archivo data.js
-            dateTo: new Date(today.valueOf() + 86400000),
-            country: '',
-            price: 0,
-            rooms: 0
-            }
+        filters: {
+            dateFrom: new Date(),
+            dateTo: new Date(),
+            country: undefined,
+            price: undefined,
+            rooms: undefined
+        }
     }
   }
 
@@ -22,10 +21,10 @@ export default class Filters extends React.Component {
     return (
       <nav className="navbar is-info" style={{ justifyContent: "center" }}>
         <div className="navbar-item">
-          <DateFilter date={this.props.filters.dateFrom} icon="sign-in-alt" />
+          <DateFilter date={this.props.filters.dateFrom} icon="fa-sign-in-alt" />
         </div>
         <div className="navbar-item">
-          <DateFilter date={this.props.filters.dateTo} icon="sign-out-alt" />
+          <DateFilter date={this.props.filters.dateTo} icon="fa-sign-out-alt" />
         </div>
         <div className="navbar-item">
           <OptionsFilter
@@ -37,7 +36,7 @@ export default class Filters extends React.Component {
               { value: "Uruguay", name: "Uruguay" },
             ]}
             selected={this.props.filters.country}
-            icon="globe"
+            icon="fa-globe"
           />
         </div>
         <div className="navbar-item">
@@ -50,7 +49,7 @@ export default class Filters extends React.Component {
               { value: 4, name: "$$$$" },
             ]}
             selected={this.props.filters.price}
-            icon="dollar-sign"
+            icon="fa-dollar-sign"
           />
         </div>
         <div className="navbar-item">
@@ -62,7 +61,7 @@ export default class Filters extends React.Component {
               { value: 30, name: "Hotel grande" },
             ]}
             selected={this.props.filters.rooms}
-            icon="bed"
+            icon="fa-bed"
           />
         </div>
       </nav>

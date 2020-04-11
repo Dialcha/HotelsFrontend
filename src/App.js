@@ -1,10 +1,8 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { today, hotelsData } from './data/data'
 import Hero from './components/hero';
-import DateFilter from './components/datefilter';
-import OptionsFilter from './components/optionsfilter';
+import Filters from './components/filters';
 
 function App() {
   const filters = {
@@ -15,19 +13,10 @@ function App() {
     rooms: 0
     }
 
-    const tamañoHoteles = [
-        { value: undefined, name: 'Cualquier tamaño' },
-        { value: 10, name: 'Hotel pequeño' },
-        { value: 20, name: 'Hotel mediano' },
-        { value: 30, name: 'Hotel grande' }
-    ]
-
 return (
     <div>
         <Hero filters={filters}/>
-        <DateFilter icon='fa-sign-in-alt' date={filters.dateFrom}/>
-        <DateFilter icon='fa-sign-out-alt' date={filters.dateTo}/>
-        <OptionsFilter options={tamañoHoteles}/>
+        <Filters filters={ filters } />
     </div>
 )
 }
