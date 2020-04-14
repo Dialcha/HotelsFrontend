@@ -1,8 +1,10 @@
 import React from 'react';
 import './App.css';
-import { today, hotelsData } from './data/data'
+import { today, hotelsData } from './assets/data'
+
 import Hero from './components/hero';
 import Filters from './components/filters';
+import Hotel from './components/hotel'
 
 export default class App extends React.Component {
     constructor(props) {
@@ -30,6 +32,7 @@ export default class App extends React.Component {
             <div>
                 <Hero filters={ this.state.filters}/>
                 <Filters filters={ this.state.filters } onFilterChange={ this.handleFilterChange }/>
+                <Hotel hotel={ hotelsData[0] }/>
             </div>
         )
     }
