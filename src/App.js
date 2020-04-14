@@ -16,13 +16,20 @@ export default class App extends React.Component {
                 rooms: undefined
             }
         }
+        this.handleFilterChange = this.handleFilterChange.bind(this);
     }
+
+    handleFilterChange(payload) {
+        this.setState({
+          filters: payload
+        })
+      }
 
     render() {
         return(
             <div>
                 <Hero filters={ this.state.filters}/>
-                <Filters filters={ this.state.filters } />
+                <Filters filters={ this.state.filters } onFilterChange={ this.handleFilterChange }/>
             </div>
         )
     }

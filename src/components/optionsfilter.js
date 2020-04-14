@@ -3,11 +3,11 @@ import React from "react";
 export default class OptionsFilter extends React.Component {
   constructor(props) {
     super(props);
-    this.props = {
-        options: [],
-        selected: '',
-        icon: ''
-    }
+    this.handleOptionChange = this.handleOptionChange.bind(this);
+  }
+
+  handleOptionChange(event) {
+    this.props.onOptionChange(event)
   }
 
   render() {
@@ -18,7 +18,10 @@ export default class OptionsFilter extends React.Component {
       <div className="field">
         <div className="control has-icons-left">
           <div className="select" style={{ width: "100%" }}>
-            <select style={{ width: "100%" }}>
+            <select
+              style={{ width: "100%" }}
+              onChange={ this.handleOptionChange }
+              name={ this.props.name }>
                 { listaOpciones }
             </select>
           </div>
