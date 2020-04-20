@@ -5,6 +5,7 @@ import { today, hotelsData } from './assets/data'
 import Hero from './components/hero';
 import Filters from './components/filters';
 import Hotel from './components/hotel'
+import Hotels from './components/hotels'
 
 export default class App extends React.Component {
     constructor(props) {
@@ -16,7 +17,8 @@ export default class App extends React.Component {
                 country: undefined,
                 price: undefined,
                 rooms: undefined
-            }
+            },
+            hotels: hotelsData
         }
         this.handleFilterChange = this.handleFilterChange.bind(this);
     }
@@ -32,7 +34,7 @@ export default class App extends React.Component {
             <div>
                 <Hero filters={ this.state.filters}/>
                 <Filters filters={ this.state.filters } onFilterChange={ this.handleFilterChange }/>
-                <Hotel hotel={ hotelsData[0] }/>
+                <Hotels hotels={ hotelsData } />
             </div>
         )
     }
