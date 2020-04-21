@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import * as moment from 'moment';
 
 // Importación de la data
 import { today, hotelsData } from './assets/data'
@@ -26,8 +27,18 @@ export default class App extends React.Component {
     }
 
     handleFilterChange(payload) {
+        console.log(hotelsData[2].availabilityFrom);
+        console.log(moment(payload.dateFrom).toDate().valueOf());
         this.setState({
-          filters: payload
+          filters: payload,
+          hotels: hotelsData.filter(hotel => {
+              return(
+                  (payload.country === hotel.country ? true : payload.country === undefined) &&
+                  (payload.price == hotel.price ? true : payload.price === undefined) &&
+                  (moment(payload.dateFrom).toDate().valueOf() >= hotel.availabilityFrom) && 
+                  (moment(payload.dateTo).toDate().valueOf() <= hotel.availabilityTo)
+                )
+          })
         })
       }
 
@@ -36,7 +47,7 @@ export default class App extends React.Component {
             <div>
                 <Hero filters={ this.state.filters}/>
                 <Filters filters={ this.state.filters } onFilterChange={ this.handleFilterChange }/>
-                <Hotels hotels={ hotelsData } />
+                <Hotels hotels={ this.state.hotels } />
             </div>
         )
     }
