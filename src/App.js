@@ -1,10 +1,12 @@
 import React from 'react';
 import './App.css';
+
+// Importación de la data
 import { today, hotelsData } from './assets/data'
 
+// Componentes usados
 import Hero from './components/hero';
 import Filters from './components/filters';
-import Hotel from './components/hotel'
 import Hotels from './components/hotels'
 
 export default class App extends React.Component {
