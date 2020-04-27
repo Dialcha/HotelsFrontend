@@ -27,16 +27,18 @@ export default class App extends React.Component {
     }
 
     handleFilterChange(payload) {
-        console.log(hotelsData[2].availabilityFrom);
-        console.log(moment(payload.dateFrom).toDate().valueOf());
+        console.log(payload);
         this.setState({
           filters: payload,
           hotels: hotelsData.filter(hotel => {
               return(
-                  (payload.country === hotel.country ? true : payload.country === undefined) &&
+                  (payload.country === undefined ? true : payload.country === hotel.country) &&
                   (payload.price == hotel.price ? true : payload.price === undefined) &&
                   (moment(payload.dateFrom).toDate().valueOf() >= hotel.availabilityFrom) && 
-                  (moment(payload.dateTo).toDate().valueOf() <= hotel.availabilityTo)
+                  (moment(payload.dateTo).toDate().valueOf() <= hotel.availabilityTo) &&
+                  (payload.rooms === undefined ? true :
+                    (hotel.rooms < payload.rooms && hotel.rooms >= payload.rooms - 10) ||
+                    (payload.rooms > 20 && hotel.rooms > 20))
                 )
           })
         })
