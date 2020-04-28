@@ -18,9 +18,11 @@ export default class Hero extends React.Component {
     }
 
     render() {
-        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
         let desde = moment(this.props.filters.dateFrom).format('dddd, LL');
         let hasta = moment(this.props.filters.dateTo).format('dddd, LL');
+        let pais = this.props.filters.country;
+        let precio = this.props.filters.price;
+        let tamaño = this.props.filters.rooms;
 
         return(
         <section className="hero is-primary">
@@ -28,7 +30,10 @@ export default class Hero extends React.Component {
                 <div className="container">
                     <h1 className="title">Hoteles</h1>
                     <h2 className="subtitle">
-        Desde el <strong>{ desde }</strong> hasta el <strong>{ hasta }</strong>
+                        Desde el <strong>{ desde }</strong> hasta el <strong>{ hasta }</strong>
+                        { pais !== undefined ? ` en ${ pais }` : ''}
+                        { precio !== undefined ? ` desde ${ precio }` : ''}
+                        { tamaño !== undefined ? ` con máximo ${ tamaño } habitaciones` : ''}
                     </h2>
                 </div>
             </div>

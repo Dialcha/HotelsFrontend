@@ -32,11 +32,11 @@ export default class App extends React.Component {
           filters: payload,
           hotels: hotelsData.filter(hotel => {
               return(
-                  (payload.country === undefined ? true : payload.country === hotel.country) &&
-                  (payload.price == hotel.price ? true : payload.price === undefined) &&
+                  (payload.country === undefined || payload.country === 'Todos los países' ? true : payload.country === hotel.country) &&
+                  (payload.price == hotel.price ? true : payload.price === undefined || payload.price == 'Cualquier precio' ) &&
                   (moment(payload.dateFrom).toDate().valueOf() >= hotel.availabilityFrom) && 
                   (moment(payload.dateTo).toDate().valueOf() <= hotel.availabilityTo) &&
-                  (payload.rooms === undefined ? true :
+                  (payload.rooms === undefined || payload.rooms == 'Cualquier tamaño' ? true :
                     (hotel.rooms < payload.rooms && hotel.rooms >= payload.rooms - 10) ||
                     (payload.rooms > 20 && hotel.rooms > 20))
                 )

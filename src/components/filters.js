@@ -22,7 +22,6 @@ export default class Filters extends React.Component {
       payload[event.target.name] = event.target.value
       this.props.onFilterChange(payload)
     }
-
   }
 
   handleOptionChange(event) {
