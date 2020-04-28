@@ -34,8 +34,8 @@ export default class App extends React.Component {
               return(
                   (payload.country === undefined || payload.country === 'Todos los países' ? true : payload.country === hotel.country) &&
                   (payload.price == hotel.price ? true : payload.price === undefined || payload.price == 'Cualquier precio' ) &&
-                  (moment(payload.dateFrom).toDate().valueOf() >= hotel.availabilityFrom) && 
-                  (moment(payload.dateTo).toDate().valueOf() <= hotel.availabilityTo) &&
+                  (payload.dateFrom == "" ? true : moment(payload.dateFrom).toDate().valueOf() >= hotel.availabilityFrom) && 
+                  (payload.dateTo == "" ? true : moment(payload.dateTo).toDate().valueOf() <= hotel.availabilityTo) &&
                   (payload.rooms === undefined || payload.rooms == 'Cualquier tamaño' ? true :
                     (hotel.rooms < payload.rooms && hotel.rooms >= payload.rooms - 10) ||
                     (payload.rooms > 20 && hotel.rooms > 20))
