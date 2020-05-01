@@ -11,16 +11,42 @@ export default class Filters extends React.Component {
     this.handleOptionChange = this.handleOptionChange.bind(this);
     }
 
+  compareDates(date1, date2){
+    let dayInMillis=24*3600000;
+    let days1=Math.floor(date1/dayInMillis);
+    let days2=Math.floor(date2.getTime()/dayInMillis);
+    // comparamos los días
+    if (days1>days2) {
+      return 1;
+    } else if (days1<days2) {
+      return -1;
+    }
+    return 0;
+  }
+
   handleDateChange(event) {
     let payload = this.props.filters
-    if( event.target.name === 'dateFrom' && Date.parse(event.target.value) < new Date()){ // Revisa que la fecha de entrada no sea menor a hoy
-      this.props.onFilterChange(payload)
-    } else if( event.target.name === 'dateTo' &&
-    Date.parse(event.target.value) < this.props.filters.dateFrom) { // Revisa que la fecha de salida no sea menor a la de entrada
-      this.props.onFilterChange(payload)
-    } else {
-      payload[event.target.name] = event.target.value
-      this.props.onFilterChange(payload)
+    let valores = event.target.name;
+    switch(valores) {
+      case 'dateFrom':
+        if(this.compareDates(Date.parse(event.target.value), new Date()) != -1) {
+          payload[event.target.name] = event.target.value;
+          payload['dateTo'] = event.target.value;
+          this.props.onFilterChange(payload)
+        } else {
+          this.props.onFilterChange(payload)
+        }
+        break;
+      case 'dateTo':
+        if(Date.parse(event.target.value) < Date.parse(this.props.filters.dateFrom)) {
+          this.props.onFilterChange(payload)
+          console.log('entró')
+        } else {
+          payload[event.target.name] = event.target.value;
+          this.props.onFilterChange(payload);
+        }
+        break;
+      default: console.log('default');
     }
   }
 

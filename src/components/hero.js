@@ -30,7 +30,9 @@ export default class Hero extends React.Component {
                 <div className="container">
                     <h1 className="title">Hoteles</h1>
                     <h2 className="subtitle">
-                        Desde el <strong>{ desde }</strong> hasta el <strong>{ hasta }</strong>
+                        Desde 
+                        { this.props.filters.dateFrom !== '' ? <strong>{' ' + desde }</strong> : ' Cualquier fecha'} hasta
+                        { this.props.filters.dateTo !== '' ? <strong>{' ' + hasta }</strong> : ' Cualquier fecha'}
                         { pais !== undefined ? ` en ${ pais }` : ''}
                         { precio !== undefined ? ` desde ${ precio }` : ''}
                         { tamaño !== undefined ? ` con máximo ${ tamaño } habitaciones` : ''}
