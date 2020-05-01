@@ -1,5 +1,4 @@
 import React from "react";
-import hotelsData from "../assets/data";
 import DataTag from "../components/datatag";
 
 export default class Hotel extends React.Component {
@@ -37,15 +36,21 @@ export default class Hotel extends React.Component {
                   ></i>
                   <i
                     className="fas fa-dollar-sign"
-                    style={{ margin: "0 .125em" }}
+                    style={
+                      hotel.price >= 2 ? { margin: '0 .125em' }: { margin: '0 .125em', opacity: '.25' }
+                    }
                   ></i>
                   <i
                     className="fas fa-dollar-sign"
-                    style={{ margin: "0 .125em", opacity: ".25" }}
+                    style={
+                      hotel.price >= 3 ? { margin: '0 .125em' }: { margin: '0 .125em', opacity: '.25' }
+                    }
                   ></i>
                   <i
                     className="fas fa-dollar-sign"
-                    style={{ margin: "0 .125em", opacity: ".25" }}
+                    style={
+                      hotel.price >= 4 ? { margin: '0 .125em' }: { margin: '0 .125em', opacity: '.25' }
+                    }
                   ></i>
                 </span>
               </div>

@@ -1,6 +1,8 @@
 import React from 'react';
 import './App.css';
 import * as moment from 'moment';
+import 'bulma/css/bulma.css';
+import '@fortawesome/fontawesome-free/js/all'
 
 // Importación de la data
 import { today, hotelsData } from './assets/data'
@@ -21,9 +23,18 @@ export default class App extends React.Component {
                 price: undefined,
                 rooms: undefined
             },
-            hotels: hotelsData
+            hotels: []
         }
         this.handleFilterChange = this.handleFilterChange.bind(this);
+    }
+
+    componentDidMount() {
+        fetch('https://wt-8a099f3e7c73b2d17f4e018b6cfd6131-0.sandbox.auth0-extend.com/acamica')
+        .then(response => response.json())
+        .then(data=> this.setState({
+            hotels: data
+        }))
+        .catch(error => console.error(error));
     }
 
     handleFilterChange(payload) {
