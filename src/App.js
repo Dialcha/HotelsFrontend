@@ -5,7 +5,7 @@ import 'bulma/css/bulma.css';
 import '@fortawesome/fontawesome-free/js/all'
 
 // Importación de la data
-import { today, hotelsData } from './assets/data'
+import { today } from './assets/data'
 
 // Componentes usados
 import Hero from './components/hero';
@@ -23,7 +23,8 @@ export default class App extends React.Component {
                 price: undefined,
                 rooms: undefined
             },
-            hotels: []
+            hotels: [],
+            initialHotels: []
         }
         this.handleFilterChange = this.handleFilterChange.bind(this);
     }
@@ -32,16 +33,14 @@ export default class App extends React.Component {
         fetch('https://wt-8a099f3e7c73b2d17f4e018b6cfd6131-0.sandbox.auth0-extend.com/acamica')
         .then(response => response.json())
         .then(data=> this.setState({
-            hotels: data
+            hotels: data,
+            initialHotels: data
         }))
         .catch(error => console.error(error));
     }
 
-    handleFilterChange(payload) {
-        console.log(payload);
-        this.setState({
-          filters: payload,
-          hotels: hotelsData.filter(hotel => {
+    filtraHoteles(payload, hotels) {
+        return hotels.filter(hotel => {
               return(
                   (payload.country === undefined || payload.country === 'Todos los países' ? true : payload.country === hotel.country) &&
                   (payload.price == hotel.price ? true : payload.price === undefined || payload.price == 'Cualquier precio' ) &&
@@ -52,6 +51,13 @@ export default class App extends React.Component {
                     (payload.rooms > 20 && hotel.rooms > 20))
                 )
           })
+        }
+
+    handleFilterChange(payload) {
+        console.log(payload);
+        this.setState({
+          filters: payload,
+          hotels: this.filtraHoteles(payload, this.state.initialHotels)
         })
       }
 
