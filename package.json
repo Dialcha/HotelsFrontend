@@ -1,5 +1,6 @@
 {
   "name": "hotels",
+  "homepage": "https://diegotkd94.github.io/HotelsFrontend/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
